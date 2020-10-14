@@ -12,12 +12,10 @@ A Go program that is a mini-interpreter for a toy programming language that allo
 The input in the toy interpreter will be of the following variety. 
 
 ```
-{
 A = 2
 B = 8
 C = A + B
 C
-}
 ```
 and return the return value of the toy program, in this case, the value 10. 
 
