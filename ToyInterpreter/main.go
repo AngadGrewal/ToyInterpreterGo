@@ -7,32 +7,40 @@ import (
 	"os"
 )
 
-// bufio is used to read a file line by line this implements buffered
-// io. Wraps an io.Reader or io.Writer Object, creating another object
-// that also implements the interface but provides buffering and some
-// help for textual I/O.
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func main() {
-	file, err := os.Open("file.txt")
+// openfile method - takes runtime argument of txt file
+func openFile(arg string) []string {
+	file, err := os.Open(arg)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	defer file.Close()
 
+	fileToArray := make([]string, 0)
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		fileToArray = append(fileToArray, scanner.Text())
 	}
 
 	err = scanner.Err()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	return fileToArray
+}
+
+// Takes array and decides what every line is
+// assignment, function or return
+func reader(array []string) {
+	for i := 0; i < len(array); i++ {
+		if array
+	}
+}
+
+
+func main() {
+	file := os.Args[1]
+	reader(openFile(file))
 }

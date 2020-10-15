@@ -20,4 +20,5 @@ C
 and return the return value of the toy program, in this case, the value 10. 
 
 Task List
-- [ ] Write a method to be able to read a file 
+- [x] Write a method to be able to read a file 
+- [x] return lines in file as an array
