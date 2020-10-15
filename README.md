@@ -19,6 +19,30 @@ C
 ```
 and return the return value of the toy program, in this case, the value 10. 
 
+It will be tested with the following 
+
+```
+A = 2
+B = 22
+Z = 91
+K = A + B
+Z = K + A
+Z
+```
+Expecting 26
+
+and 
+
+```
+A = 2 + 1
+B = A + 9
+C = A + B
+A
+``` 
+Expecting 9
+
 Task List
 - [x] Write a method to be able to read a file 
 - [x] return lines in file as an array
+- [x] recognise whether a statement is an assignment, addition or return
+- [x] if a line has assignment and addition, recognise it as an assignment
