@@ -37,20 +37,34 @@ func openFile(arg string) []string {
 func reader(array []string) {
 	assignment := "="
 	addition := "+"
+
+	// put out a bunch of instructions
+	instructionArray := make([]string, 0)
+
 	for i := 0; i < len(array); i++ {
-		if strings.Contains(array[i], assignment) && strings.Contains(array[i], addition) {
+		stripped := strings.ReplaceAll(array[i], " ", "")
+		if strings.Contains(stripped, assignment) && strings.Contains(stripped, addition) {
 			fmt.Println("This is an addition")
 
-		} else if strings.Contains(array[i], assignment) {
+		} else if strings.Contains(stripped, assignment) {
 			fmt.Println("this is an assignment")
+			a := stripped[strings.Index(stripped, assignment)+1]
 
-		} else if strings.Contains(array[i], addition) {
+		} else if strings.Contains(stripped, addition) {
 			fmt.Println("This is an addition")
 
 		} else {
 			fmt.Println("This is a return statement")
 		}
 	}
+}
+
+func addition(a int, b int) int {
+	return a + b
+}
+
+func assignment(a int) int {
+	return a
 }
 
 func main() {
