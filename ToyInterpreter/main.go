@@ -48,7 +48,11 @@ func reader(array []string) {
 
 		} else if strings.Contains(stripped, assignment) {
 			fmt.Println("this is an assignment")
-			a := stripped[strings.Index(stripped, assignment)+1]
+			a := string(stripped[strings.Index(stripped, assignment)-1])
+			b := string(stripped[strings.Index(stripped, assignment)+1])
+			instructionArray = append(instructionArray, a)
+			instructionArray = append(instructionArray, assignment)
+			instructionArray = append(instructionArray, b)
 
 		} else if strings.Contains(stripped, addition) {
 			fmt.Println("This is an addition")

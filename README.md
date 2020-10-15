@@ -46,4 +46,5 @@ Task List
 - [x] return lines in file as an array
 - [x] recognise whether a statement is an assignment, addition or return
 - [x] if a line has assignment and addition, recognise it as an assignment
+- [ ] work out how assignment would work in terms of reading from instructions.
 - [ ] Create an array that adds a set of instructions
