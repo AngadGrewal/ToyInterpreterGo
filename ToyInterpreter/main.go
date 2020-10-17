@@ -5,8 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
+
+var instructionArray []string
+var variableArray []string
 
 // openfile method - takes runtime argument of txt file
 func openFile(arg string) []string {
@@ -38,37 +42,39 @@ func reader(array []string) {
 	assignment := "="
 	addition := "+"
 
-	// put out a bunch of instructions
-	instructionArray := make([]string, 0)
+	variableMap := make(map[string]int)
 
 	for i := 0; i < len(array); i++ {
 		stripped := strings.ReplaceAll(array[i], " ", "")
 		if strings.Contains(stripped, assignment) && strings.Contains(stripped, addition) {
-			fmt.Println("This is an addition")
+			a := string(stripped[strings.Index(stripped, addition)-1])
+			b := string(stripped[strings.Index(stripped, addition)+1])
+			c := string(stripped[strings.Index(stripped, assignment)-1])
+			instructionArray = append(instructionArray, c, a, b, addition, assignment)
+			variableMap[c] = variableMap[a] + variableMap[b]
 
 		} else if strings.Contains(stripped, assignment) {
-			fmt.Println("this is an assignment")
+			// fmt.Println("this is an assignment")
 			a := string(stripped[strings.Index(stripped, assignment)-1])
 			b := string(stripped[strings.Index(stripped, assignment)+1])
-			instructionArray = append(instructionArray, a)
-			instructionArray = append(instructionArray, assignment)
-			instructionArray = append(instructionArray, b)
+			instructionArray = append(instructionArray, a, b, assignment)
+			variableArray = append(variableArray, a, b)
 
-		} else if strings.Contains(stripped, addition) {
-			fmt.Println("This is an addition")
+			bAsInt, err := strconv.Atoi(b)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			variableMap[a] = bAsInt
 
 		} else {
-			fmt.Println("This is a return statement")
+			// fmt.Println("This is a return statement")
+			c := string(stripped)
+			instructionArray = append(instructionArray, c)
+			fmt.Print("The answer is ")
+			fmt.Print(variableMap[c])
 		}
 	}
-}
-
-func addition(a int, b int) int {
-	return a + b
-}
-
-func assignment(a int) int {
-	return a
 }
 
 func main() {
