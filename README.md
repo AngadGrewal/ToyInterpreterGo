@@ -50,3 +50,4 @@ Task List
 - [x] Create an array that adds a set of instructions
 - [x] Create a map that acts as a variable store
 - [ ] Make the maths work
+- [ ] Add multiplication, subtraction and division
