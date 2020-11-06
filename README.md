@@ -37,9 +37,9 @@ and
 A = 2 + 1
 B = A + 9
 C = A + B
-A
+C 
 ``` 
-Expecting 9
+Expecting 15
 
 Task List
 - [x] Write a method to be able to read a file 
@@ -49,5 +49,5 @@ Task List
 - [x] work out how assignment would work in terms of reading from instructions.
 - [x] Create an array that adds a set of instructions
 - [x] Create a map that acts as a variable store
-- [ ] Make the maths work
+- [x] Make the maths work (make sure that the program can read multiple digits)
 - [ ] Add multiplication, subtraction and division

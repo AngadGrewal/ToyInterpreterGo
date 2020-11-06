@@ -46,19 +46,40 @@ func reader(array []string) {
 
 	for i := 0; i < len(array); i++ {
 		stripped := strings.ReplaceAll(array[i], " ", "")
-		if strings.Contains(stripped, assignment) && strings.Contains(stripped, addition) {
-			a := string(stripped[strings.Index(stripped, addition)-1])
-			b := string(stripped[strings.Index(stripped, addition)+1])
-			c := string(stripped[strings.Index(stripped, assignment)-1])
-			instructionArray = append(instructionArray, c, a, b, addition, assignment)
-			variableMap[c] = variableMap[a] + variableMap[b]
 
+		// Checks whether the line is an addition
+		if strings.Contains(stripped, assignment) && strings.Contains(stripped, addition) {
+
+			// Substrings of each of the non operator characters in every line
+			a := stripped[strings.Index(stripped, assignment)+1 : strings.Index(stripped, addition)]
+			b := stripped[strings.Index(stripped, addition)+1 : len(stripped)]
+			c := stripped[0:strings.Index(stripped, assignment)]
+
+			aInt, err0 := strconv.Atoi(a)
+			bInt, err1 := strconv.Atoi(b)
+
+			// uses the errors to determine whether an input substring is a string or an int
+			if err1 != nil && err0 == nil {
+				variableMap[c] = aInt + variableMap[b]
+			}
+
+			if err0 != nil && err1 == nil {
+				variableMap[c] = variableMap[a] + bInt
+			}
+
+			if err0 == nil && err1 == nil {
+				variableMap[c] = aInt + bInt
+			}
+
+			if err0 != nil && err1 != nil {
+				variableMap[c] = variableMap[a] + variableMap[b]
+			}
+
+			// checks whether the line is an assignment
 		} else if strings.Contains(stripped, assignment) {
-			// fmt.Println("this is an assignment")
-			a := string(stripped[strings.Index(stripped, assignment)-1])
-			b := string(stripped[strings.Index(stripped, assignment)+1])
-			instructionArray = append(instructionArray, a, b, assignment)
-			variableArray = append(variableArray, a, b)
+
+			a := stripped[0:strings.Index(stripped, assignment)]
+			b := stripped[strings.Index(stripped, assignment)+1 : len(stripped)]
 
 			bAsInt, err := strconv.Atoi(b)
 			if err != nil {
@@ -67,16 +88,18 @@ func reader(array []string) {
 
 			variableMap[a] = bAsInt
 
+			// Here if the line calls for a return
 		} else {
-			// fmt.Println("This is a return statement")
+
 			c := string(stripped)
-			instructionArray = append(instructionArray, c)
+
 			fmt.Print("The answer is ")
 			fmt.Print(variableMap[c])
 		}
 	}
 }
 
+// main method runs the program
 func main() {
 	file := os.Args[1]
 	reader(openFile(file))
