@@ -9,9 +9,6 @@ import (
 	"strings"
 )
 
-var instructionArray []string
-var variableArray []string
-
 // openfile method - takes runtime argument of txt file
 func openFile(arg string) []string {
 	file, err := os.Open(arg)
